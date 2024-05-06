@@ -10,6 +10,9 @@ const req = ()=>{
   //   console.log(res);
     
   // })
+  request.get('/api').then(res=>{
+    console.log(res);
+  })
 }
 </script>
 
