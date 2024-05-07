@@ -21,9 +21,10 @@ export default defineConfig(({ mode }) => {
       host: 'localhost',
       proxy: {
         [env.VITE_APP_BASE_API]: {
-          target: 'http://localhost:8989',
+          target: 'https://mock.mengxuegu.com/mock/6638b8cfcab9671f88bd3125/api',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/`^${env.VITE_APP_BASE_API}`/, '')
+          // rewrite: (path) => path.replace(/`^${env.VITE_APP_BASE_API}`/, '')
+          rewrite: (path) => path.replace(new RegExp('^' + `${env.VITE_APP_BASE_API}`),'')
         },
       }
     }

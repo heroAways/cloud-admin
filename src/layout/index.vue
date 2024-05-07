@@ -1,7 +1,7 @@
 <template>
-    <el-container>
+    <el-container class="layout-container">
         <LayoutAside></LayoutAside>
-        <el-container>
+        <el-container direction="vertical">
             <LayoutHeader></LayoutHeader>
             <LayoutMain></LayoutMain>
         </el-container>

@@ -1,0 +1,49 @@
+:root {
+    --lyf-color-white : #fff;
+    --lyf-color-blue : #409eff;
+    --lyf-bg-menuActiveColor : #000;
+    --mxg-bg-menuHoverColor: #000;
+}
+
+
+.layout-container {
+    .el-aside {
+        .logo {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            img {
+                width: 25px;
+                height: 25px;
+            }
+            span {
+                color: var(--lyf-color-blue);
+                font-size: 14px;
+                margin-left: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+.el-menu {
+    border-right: none;
+}
+.el-menu-item {
+    background: transparent !important;
+}
+.el-menu-item.is-active {
+    color: var(--lyf-color-white) !important;
+    background: var(--lyf-bg-menuActiveColor) !important;
+}
+.el-menu-item:hover {
+    color: var(--lyf-color-white) !important;
+    background: var(--lyf-bg-menuActiveColor) !important;
+}
+.el-sub-menu__title {
+    background: transparent !important;
+}
