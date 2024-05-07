@@ -1,5 +1,5 @@
-import axios from 'axios';
-const service = axios.create({
+import axios, { type AxiosInstance } from 'axios';
+const service : AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000
 });

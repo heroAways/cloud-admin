@@ -17,8 +17,8 @@ const req = ()=>{
 </script>
 
 <template>
-  <SvgIcon icon="Loading"></SvgIcon>
-  <button @click="req">点击</button>
+  <!-- <SvgIcon icon="Loading"></SvgIcon>
+  <button @click="req">点击</button> -->
   <RouterView />
 </template>
 
