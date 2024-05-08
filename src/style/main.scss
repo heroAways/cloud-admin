@@ -9,3 +9,11 @@ html,body,#app{
 .el-container {
     height: 100%;
 }
+
+.flex {
+    display: flex;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+}

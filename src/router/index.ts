@@ -11,6 +11,7 @@ const dynamicRoutes: RouteRecordRaw[] = [
         name:'Home',
         component:()=>import('@/views/Home/index.vue'),
         meta:{
+          icon:'house',
           title:'首页',
           caches:false,
           hidden:false
@@ -22,8 +23,10 @@ const dynamicRoutes: RouteRecordRaw[] = [
         meta: {
           title: '系统管理',
           caches: false,
-          hidden: false
+          hidden: false,
+          icon:'setting'
         },
+        redirect:'/system/menu',
         children:[
           {
             path:'/system/menu',
@@ -32,7 +35,8 @@ const dynamicRoutes: RouteRecordRaw[] = [
             meta:{
               title:'菜单管理',
               caches:false,
-              hidden:false
+              hidden:false,
+              icon:'menu'
             }
           },
           // /system/role 角色管理
@@ -43,7 +47,8 @@ const dynamicRoutes: RouteRecordRaw[] = [
             meta: {
               title: '角色管理',
               caches: false,
-              hidden: false
+              hidden: false,
+              icon:'iceCream'
             }
           },
           // /system/user 用户管理
@@ -54,7 +59,8 @@ const dynamicRoutes: RouteRecordRaw[] = [
             meta: {
               title: '用户管理',
               caches: false,
-              hidden: false
+              hidden: false,
+              icon:'user'
             }
           },
         ]
@@ -65,8 +71,10 @@ const dynamicRoutes: RouteRecordRaw[] = [
         meta: {
           title: '商品管理',
           caches: false,
-          hidden: false
+          hidden: false,
+          icon:'Goods'
         },
+        redirect:'/goods/list',
         children:[
           {
             path: '/goods/list',
@@ -75,7 +83,8 @@ const dynamicRoutes: RouteRecordRaw[] = [
             meta: {
               title: '商品列表',
               caches: false,
-              hidden: false
+              hidden: false,
+              icon:'GoodsFilled'
             }
           },
           // goods/category 商品分类
@@ -86,7 +95,8 @@ const dynamicRoutes: RouteRecordRaw[] = [
             meta: {
               title: '商品分类',
               caches: false,
-              hidden: false
+              hidden: false,
+              icon:'Operation'
             }
           }
         ]

@@ -1,6 +1,7 @@
 <template>
     <el-menu active-text-color="#ffd04b" background-color="#fff" class="el-menu-vertical-demo"
-        :default-active="$route.path" text-color="#000" router :default-openeds="['/system']">
+        :default-active="$route.path" text-color="#000" router :default-openeds="['/system']"
+        :collapse="LayoutConfigStore.isCollapse">
         <el-menu-item index="/home">
             <svg-icon icon="house"></svg-icon>
             <span>首页</span>
@@ -48,7 +49,8 @@
     </el-menu>
 </template>
 <script lang='ts' setup>
-
+import {useLayoutConfig} from '@/stores/useLayoutConfig'
+const LayoutConfigStore = useLayoutConfig()
 </script>
 <style lang='scss' scoped>
 

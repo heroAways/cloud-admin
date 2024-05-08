@@ -7,7 +7,26 @@
 
 
 .layout-container {
-    .el-aside {
+    .layout-header {
+        height: auto;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        cursor: pointer;
+        .layout-header-breadCurem {
+            display: flex;
+            align-items: center;
+            .layout-header-breadCurem-icon {
+                margin: 0 10px;
+            }
+            .layout-header-breadCurem-bread {
+                display: flex;
+            }
+        }
+    }
+    .layout-aside {
         .logo {
             height: 50px;
             display: flex;
@@ -27,6 +46,14 @@
                 text-overflow: ellipsis;
             }
         }
+    }
+    .layout-aside-menu-200 {
+        width: 200px !important;
+        transition: all 0.3s ease !important;
+    }
+    .layout-aside-menu-60 {
+        width: 60px !important;
+        transition: all 0.3s ease !important;
     }
 }
 
