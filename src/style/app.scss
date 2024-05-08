@@ -1,8 +1,9 @@
 :root {
-    --lyf-color-white : #fff;
-    --lyf-color-blue : #409eff;
-    --lyf-bg-menuActiveColor : #000;
-    --mxg-bg-menuHoverColor: #000;
+    --lyf-color-white: #fff;
+    --lyf-color-blue: #409eff;
+    --lyf-bg-menuActiveColor: #000;
+    --lyf-bg-menuHoverColor: #000;
+    --lyf-border-color: #f1f2f3;
 }
 
 
@@ -15,17 +16,54 @@
         justify-content: space-between;
         height: 50px;
         cursor: pointer;
+
         .layout-header-breadCurem {
             display: flex;
             align-items: center;
+
             .layout-header-breadCurem-icon {
                 margin: 0 10px;
             }
+
             .layout-header-breadCurem-bread {
                 display: flex;
             }
         }
+
+        .layout-header-userDropdown {
+            display: flex;
+            align-items: center !important;
+            height: inherit;
+
+            .layout-header-userDropdown-icon {
+                padding: 0 10px;
+                height: inherit;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:hover {
+                    background: var(--lyf-border-color) !important;
+                }
+            }
+            .layout-header-userDropdown-switch {
+                padding: 0 10px;
+                    height: inherit;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    &:hover {
+                        background: var(--lyf-border-color) !important;
+                    }
+            }
+            .el-dropdown-link {
+                outline: 0;
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+            }
+        }
     }
+
     .layout-aside {
         .logo {
             height: 50px;
@@ -33,10 +71,12 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
+
             img {
                 width: 25px;
                 height: 25px;
             }
+
             span {
                 color: var(--lyf-color-blue);
                 font-size: 14px;
@@ -47,10 +87,12 @@
             }
         }
     }
+
     .layout-aside-menu-200 {
         width: 200px !important;
         transition: all 0.3s ease !important;
     }
+
     .layout-aside-menu-60 {
         width: 60px !important;
         transition: all 0.3s ease !important;
@@ -60,17 +102,21 @@
 .el-menu {
     border-right: none;
 }
+
 .el-menu-item {
     background: transparent !important;
 }
+
 .el-menu-item.is-active {
     color: var(--lyf-color-white) !important;
     background: var(--lyf-bg-menuActiveColor) !important;
 }
+
 .el-menu-item:hover {
     color: var(--lyf-color-white) !important;
     background: var(--lyf-bg-menuActiveColor) !important;
 }
+
 .el-sub-menu__title {
     background: transparent !important;
 }
