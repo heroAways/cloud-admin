@@ -1,10 +1,10 @@
 <template>
     <div class="layout-header-userDropdown">
         <div class="layout-header-userDropdown-icon">
-            <svg-icon icon="FullScreen"></svg-icon>
+            <svg-icon @click="handleFullScreen" :icon="isFullscreen ? 'aim' : 'FullScreen'"></svg-icon>
         </div>
         <div class="layout-header-userDropdown-switch">
-            <el-switch></el-switch>
+            <el-switch v-model="isDark" inline-prompt active-icon="moon" inactive-icon="sunny"></el-switch>
         </div>
         <div class="layout-header-userDropdown-dropDown">
             <el-dropdown>
@@ -15,11 +15,10 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item command="a">Action 1</el-dropdown-item>
-                        <el-dropdown-item command="b">Action 2</el-dropdown-item>
-                        <el-dropdown-item command="c">Action 3</el-dropdown-item>
-                        <el-dropdown-item command="d" disabled>Action 4</el-dropdown-item>
-                        <el-dropdown-item command="e" divided>Action 5</el-dropdown-item>
+                        <el-dropdown-item @click="$router.push('/')">首页</el-dropdown-item>
+                        <el-dropdown-item @click="$router.push('/401')">401</el-dropdown-item>
+                        <el-dropdown-item @click="$router.push('/404')">404</el-dropdown-item>
+                        <el-dropdown-item @click="$router.push('/login')" divided>退出系统</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -27,6 +26,17 @@
     </div>
 </template>
 <script lang='ts' setup>
+import { useFullscreen, useDark } from '@vueuse/core'
+const { isFullscreen,toggle } = useFullscreen()
+const handleFullScreen = ()=>{
+   toggle()
+}
+
+const isDark = useDark({
+    valueDark: 'dark',
+    valueLight: '',
+    initialValue:'dark'
+})
 
 </script>
 <style lang='scss' scoped>

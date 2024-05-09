@@ -1,12 +1,10 @@
 <template>
-<h1 @click="handleClick">主页</h1>
+<h1>主页</h1>
+<el-input v-model="value"></el-input>
 </template>
-<script lang='ts' setup>
-import { getBanner } from '@/api'
-const handleClick = async () =>{
-    let res = await getBanner()
-    console.log(res);
-}
+<script lang='ts' setup name="Home">
+import {ref} from 'vue'
+let value = ref('')
 </script>
 <style lang='scss' scoped>
 

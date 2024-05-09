@@ -15,6 +15,7 @@
         align-items: center;
         justify-content: space-between;
         height: 50px;
+        border-bottom: 1px solid #f1f2f3;
         cursor: pointer;
 
         .layout-header-breadCurem {
@@ -41,20 +42,24 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
                 &:hover {
                     background: var(--lyf-border-color) !important;
                 }
             }
+
             .layout-header-userDropdown-switch {
                 padding: 0 10px;
-                    height: inherit;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    &:hover {
-                        background: var(--lyf-border-color) !important;
-                    }
+                height: inherit;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    background: var(--lyf-border-color) !important;
+                }
             }
+
             .el-dropdown-link {
                 outline: 0;
                 display: flex;
@@ -65,6 +70,8 @@
     }
 
     .layout-aside {
+        border-right: 1px solid #f1f2f3;
+
         .logo {
             height: 50px;
             display: flex;
@@ -96,6 +103,73 @@
     .layout-aside-menu-60 {
         width: 60px !important;
         transition: all 0.3s ease !important;
+    }
+
+    .layout-main {
+        overflow: hidden;
+        padding: 0;
+
+        .layout-main-wrap {
+            padding: 20px !important;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+.usian {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #f1f2f3;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .usian-img {
+        width: 250px;
+    }
+    .usian-content {
+        width: 500px;
+        height: 200px;
+        padding: 20px;
+        border: 1px solid #f1f2f3;
+        .usian-title {
+            font-weight: bold;
+            font-size: 25px;
+        }
+    }
+}
+
+.el-scrollbar__view {
+    height: 100% !important;
+
+    .error-container {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #f1f2f3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center !important;
+
+        .error-container-img {
+            width: 350px;
+        }
+
+        .error-container-textBox {
+            width: 500px;
+            text-align: left;
+            margin-top: 20px;
+            margin-left: 146px;
+            .error-title {
+                font-weight: bold;
+                font-size: 25px;
+            }
+            .error-link {
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+        }
     }
 }
 

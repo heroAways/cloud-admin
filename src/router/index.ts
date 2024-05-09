@@ -13,7 +13,7 @@ const dynamicRoutes: RouteRecordRaw[] = [
         meta:{
           icon:'house',
           title:'首页',
-          caches:false,
+          caches:true,
           hidden:false
         }
       },
@@ -132,6 +132,11 @@ const dynamicRoutes: RouteRecordRaw[] = [
         }
       }
     ]
+  },
+  {
+    path:'/login',
+    name:'Login',
+    component:()=>import('@/views/Login/index.vue'),
   }
 ]
 const router = createRouter({

@@ -6,17 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "text":"vite --mode text",
+    "text": "vite --mode text",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
     "element-plus": "^2.7.2",
     "pinia": "^2.1.7",
     "sass": "^1.76.0",
+    "unplugin-vue-setup-extend-plus": "^1.0.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
