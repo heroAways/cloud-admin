@@ -33,8 +33,9 @@
 <script lang='ts' setup>
 import { ref, reactive } from 'vue'
 import { local } from '@/utils/storage'
-import {loginApi} from '@/api/userApi'
 import { useRouter } from 'vue-router'
+import { useAuthorStore } from '@/stores/useAuthor'
+const store = useAuthorStore()
 const router = useRouter()
 const loginRuleRef = ref()
 let state = reactive({
@@ -73,20 +74,9 @@ const loginRules = reactive({
 const handleSubmit = () => {
     loginRuleRef.value.validate(async (valid: boolean) => {
         if (valid) {
-            if (state.isRemember) {
-                local.set('username', state.loginForm.username)
-                local.set('password', state.loginForm.password)
-                local.set('isRemember', state.isRemember)
-            } else {
-                local.remove('username')
-                local.remove('password')
-                local.remove('isRemember')
-            }
-            loginApi().then(res => {
-                console.log(res);
-                router.push('/')
-            })
-            
+            store.setRemember(state)
+            await store.login(state)
+            router.push('/')
         }
     })
 }

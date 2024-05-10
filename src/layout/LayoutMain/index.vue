@@ -3,13 +3,15 @@
         <el-scrollbar>
             <div class="layout-main-wrap">
                 <router-view v-slot="{ Component }">
-                    <transition name="fade1" mode="out-in">
+                    <transition name="fade" mode="out-in">
                         <keep-alive>
-                            <component v-if="$route.meta.caches" :key="$route.name" :is="Component" />
+                                <component v-if="$route.meta.caches" :key="$route.name" :is="Component" />
                         </keep-alive>
                     </transition>
                     <transition name="fade" mode="out-in">
-                        <component v-if="!$route.meta.caches" :key="$route.name" :is="Component" />
+                        <div :key="$route.path">
+                            <component v-if="!$route.meta.caches" :is="Component" />
+                        </div>
                     </transition>
                 </router-view>
             </div>
@@ -17,8 +19,12 @@
     </el-main>
 </template>
 <script lang='ts' setup>
-
+import { onActivated, onDeactivated } from 'vue';
+onActivated(() => {
+    console.log('onActivated');
+})
+onDeactivated(() => {
+    console.log('onDeactivated');
+})
 </script>
-<style lang='scss' scoped>
-
-</style>
+<style lang='scss' scoped></style>

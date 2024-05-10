@@ -1,11 +1,11 @@
 <template>
-<h1>主页</h1>
-<el-input v-model="value"></el-input>
+    <div>
+        <h1>主页</h1>
+        <el-input width="200" v-model="value"></el-input>
+    </div>
 </template>
 <script lang='ts' setup name="Home">
-import {ref} from 'vue'
+import { ref } from 'vue'
 let value = ref('')
 </script>
-<style lang='scss' scoped>
-
-</style>
+<style lang='scss' scoped></style>

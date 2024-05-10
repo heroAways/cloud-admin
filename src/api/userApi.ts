@@ -1,4 +1,4 @@
 import request from "@/utils/request";
-export const loginApi = ()=>{
-    return request('/auth/token', 'POST', {username:'15565775937', password:'123456'})
+export const loginApi = (data:any)=>{
+    return request('/auth/token', 'POST', data)
 } 

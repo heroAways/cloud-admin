@@ -15,10 +15,11 @@ export const local = {
 }
 export const sesison = {
     set: (key: string, value: any) => {
-        sessionStorage.setItem(key, JSON.stringify(value))
+       sessionStorage.setItem(key, JSON.stringify(value || ''))
     },
     get: (key: string) => {
-        return JSON.parse(sessionStorage.getItem(key) || '{}')
+        let json = sessionStorage.getItem(key);
+        return JSON.parse(json as string);
     },
     remove: (key: string) => {
         sessionStorage.removeItem(key)

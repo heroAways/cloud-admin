@@ -6,7 +6,7 @@ import axios, {
     type InternalAxiosRequestConfig,
     type Method
 } from "axios";
-
+import {useAuthorStore} from '@/stores/useAuthor'
 const service: AxiosInstance = axios.create({
       baseURL: import.meta.env.VITE_APP_BASE_API,
     // baseURL: 'https://mock.mengxuegu.com/mock/6638b8cfcab9671f88bd3125/api',
@@ -14,6 +14,11 @@ const service: AxiosInstance = axios.create({
 });
 // 添加请求拦截器
 service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+    const store = useAuthorStore()
+    const token = store.token
+    if(token){
+        config.headers.Authorization =`Bearer ${token}`
+    }
     // 在发送请求之前做些什么
     return config;
 }, (error: AxiosError) => {
