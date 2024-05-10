@@ -18,7 +18,7 @@
                         <el-dropdown-item @click="$router.push('/')">首页</el-dropdown-item>
                         <el-dropdown-item @click="$router.push('/401')">401</el-dropdown-item>
                         <el-dropdown-item @click="$router.push('/404')">404</el-dropdown-item>
-                        <el-dropdown-item @click="$router.push('/login')" divided>退出系统</el-dropdown-item>
+                        <el-dropdown-item @click="logout" divided>退出系统</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -27,11 +27,15 @@
 </template>
 <script lang='ts' setup>
 import { useFullscreen, useDark } from '@vueuse/core'
+import {useAuthorStore} from '@/stores/useAuthor'
+const store = useAuthorStore()
 const { isFullscreen,toggle } = useFullscreen()
 const handleFullScreen = ()=>{
    toggle()
 }
-
+const logout = ()=>{
+    store.logoutStore()
+}
 const isDark = useDark({
     valueDark: 'dark',
     valueLight: '',
