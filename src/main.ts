@@ -4,6 +4,7 @@ import router from './router'
 import {setRegisterGlobal} from './global'
 import '@/style/index.scss'
 import pinia from './stores'
+import './permission'
 const app = createApp(App)
 app.use(setRegisterGlobal)
 app.use(pinia)
