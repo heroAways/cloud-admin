@@ -1,9 +1,12 @@
 import { local } from '@/utils/storage'
 import {defineStore} from 'pinia'
-import { loginApi, logoutApi } from '@/api/userApi'
+import { loginApi, logoutApi,getUserInfoApi } from '@/api/userApi'
 import { ref } from 'vue'
 export const useAuthorStore = defineStore('author',()=>{
     const token = ref<string>('')
+    const user = ref()
+    const buttonList = ref([])
+    const menuList = ref([])
     const setRemember = (state:any)=>{
         if (state.isRemember) {
             local.set('username', state.loginForm.username)
@@ -15,13 +18,24 @@ export const useAuthorStore = defineStore('author',()=>{
             local.remove('isRemember')
         }
     }
+    const getUser = async () => {
+        try{
+            let res = await getUserInfoApi()
+            console.log(res);
+            user.value =res.data.data.userInfo
+            buttonList.value =res.data.data.buttonList
+            menuList.value = res.data.data.menuList
+        }catch(err){
+            console.log(err);
+        }
+    }
     const reMoteToken = ()=>{
         token.value = ''
     }
     const logoutStore = async ()=>{
         let res = await logoutApi()
         console.log(res);
-        token.value = ''
+        reMoteToken()
         window.location.reload()
     } 
     const login = async (state:any)=>{
@@ -34,7 +48,11 @@ export const useAuthorStore = defineStore('author',()=>{
         login,
         token,
         reMoteToken,
-        logoutStore
+        logoutStore,
+        getUser,
+        user,
+        buttonList,
+        menuList
     }
 },{
     persist: true

@@ -9,8 +9,8 @@
         <div class="layout-header-userDropdown-dropDown">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <el-avatar :size="30" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png" />
-                    <span>何敏</span>
+                    <el-avatar :size="30" :src="store.user.imageUrl" />
+                    <span>{{ store.user.nickName }}</span>
                     <el-icon class="el-icon--right"><arrow-down /></el-icon>
                 </span>
                 <template #dropdown>

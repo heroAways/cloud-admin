@@ -5,3 +5,6 @@ export const loginApi = (data:any)=>{
 export const logoutApi = ()=>{
     return request('/auth/logout','POST')
 }
+export const getUserInfoApi = ()=>{
+    return request('/system/menu/user','GET')
+}
