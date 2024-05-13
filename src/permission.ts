@@ -7,7 +7,7 @@ router.beforeEach(async (to, from, next) => {
     // 如果有token就放行 但是不能进入login页面
     if (token) {
         if (to.path === '/login') {
-            next({ path: from.path })
+            next(from.path)
         } else {
             if(!store.user?.username || store.buttonList.length <= 0){
                 const res:any = await store.getUser()

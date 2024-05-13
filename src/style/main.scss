@@ -18,3 +18,12 @@ html,body,#app{
     display: flex;
     justify-content: center;
 }
+.layout-padding {
+    border: 1px solid #f1f2f3 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    padding: 20px !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
