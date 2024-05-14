@@ -3,7 +3,7 @@ export interface SearchParamsType {
 }
 export interface ResponseDataType {
     children: DatumChild[];
-    code: string;
+    code?: string;
     component: null | string;
     createTime: string;
     id: string;
@@ -19,7 +19,7 @@ export interface ResponseDataType {
 }
 export interface DatumChild {
     children: ChildChild[];
-    code: string;
+    code?: string;
     component: string;
     createTime: string;
     id: string;
@@ -36,7 +36,7 @@ export interface DatumChild {
 
 export interface ChildChild {
     children: string[];
-    code: string;
+    code?: string;
     createTime: string;
     id: string;
     meta: PurpleMeta;
@@ -69,5 +69,46 @@ export interface DatumMeta {
     hidden: boolean;
     icon: string;
     linkTo: string;
+    title: string;
+}
+
+export type ResposeAddMenuType = {
+    id?: string;
+    code?: string;
+    component: string;
+    meta: Meta;
+    name: string;
+    parentId: string;
+    path: string;
+    redirect: string;
+    remark: string;
+    sort: number;
+    type: string;
+}
+
+export type Meta = {
+    cache: boolean;
+    hidden: boolean;
+    icon: string;
+    title: string;
+}
+
+export type selectMenuTpye = {
+    code?: number;
+    data: Datum[];
+    message: string;
+}
+
+export type Datum = {
+    children: Child[];
+    id: string;
+    parentId: null;
+    title: string;
+}
+
+export type Child = {
+    children: string[];
+    id: string;
+    parentId: string;
     title: string;
 }
