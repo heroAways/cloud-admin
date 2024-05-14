@@ -22,9 +22,9 @@ export const useAuthorStore = defineStore('author',()=>{
         try{
             let res = await getUserInfoApi()
             console.log(res);
-            user.value =res.data.data.userInfo
-            buttonList.value =res.data.data.buttonList
-            menuList.value = res.data.data.menuList
+            user.value =res.data.userInfo
+            buttonList.value =res.data.buttonList
+            menuList.value = res.data.menuList
         }catch(err){
             console.log(err);
         }
@@ -41,7 +41,9 @@ export const useAuthorStore = defineStore('author',()=>{
     const login = async (state:any)=>{
         let res = await loginApi(state.loginForm)
         console.log('res==>',res);
-        token.value = res.data.data.access_token
+        if(res.code==20000){
+            token.value = res.data.access_token
+        }
     }
     return {
         setRemember,

@@ -11,7 +11,7 @@ router.beforeEach(async (to, from, next) => {
         } else {
             if(!store.user?.username || store.buttonList.length <= 0){
                 const res:any = await store.getUser()
-                if(res.data.data.userInfo.username){
+                if(res.data.userInfo.username){
                     next()
                 }else{
                     next('/login')
