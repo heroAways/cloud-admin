@@ -21,7 +21,6 @@ export const useAuthorStore = defineStore('author',()=>{
     const getUser = async () => {
         try{
             let res = await getUserInfoApi()
-            console.log(res);
             user.value =res.data.userInfo
             buttonList.value =res.data.buttonList
             menuList.value = res.data.menuList
@@ -34,7 +33,6 @@ export const useAuthorStore = defineStore('author',()=>{
     }
     const logoutStore = async ()=>{
         let res = await logoutApi()
-        console.log(res);
         reMoteToken()
         window.location.reload()
     } 

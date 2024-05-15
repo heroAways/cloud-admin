@@ -9,6 +9,6 @@ const app = createApp(App)
 app.use(setRegisterGlobal)
 app.use(pinia)
 app.use(router)
-console.log('main',import.meta.env.VITE_APP_BASE_API);
+// console.log('main',import.meta.env.VITE_APP_BASE_API);
 
 app.mount('#app')

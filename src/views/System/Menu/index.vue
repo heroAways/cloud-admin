@@ -9,17 +9,17 @@
                 <el-button type="success" icon="plus" @click="handleClick">新增菜单</el-button>
             </el-form-item>
         </el-form>
-        <el-table :data="tableData" style="width: 100%; margin-bottom: 20px" row-key="id" border default-expand-all>
-            <el-table-column align="center" prop="date" label="菜单名称" width="150">
+        <el-table :fit="true" :data="tableData" style="width: auto; margin-bottom: 20px" row-key="id" border>
+            <el-table-column align="center" prop="date" label="菜单名称">
                 <template #default="{ row }" style="display: flex;align-items: center;justify-content: center;">
                     <svg-icon v-if="row.meta.icon" style="margin-right: 10px;"
                         :icon="filterIcon(row.meta.icon)"></svg-icon>
                     <span>{{ row.meta.title }}</span>
                 </template>
             </el-table-column>
-            <el-table-column align="center" prop="path" label="路由地址" width="120" />
-            <el-table-column align="center" prop="component" label="组件路径" width="120" />
-            <el-table-column align="center" prop="code" label="权限标识" width="120" />
+            <el-table-column align="center" prop="path" label="路由地址"  />
+            <el-table-column align="center" prop="component" label="组件路径"  />
+            <el-table-column align="center" prop="code" label="权限标识"  />
             <el-table-column align="center" label="类型" width="120">
                 <template #default="{ row }">
                     <el-tag v-if="row.type == 1" tyep="primary">菜单</el-tag>
@@ -89,7 +89,6 @@ const getMenuList = async () => {
     try {
         let res = await getMenuListApi(findData.value)
         tableData.value = res.data
-        console.log(res);
     } catch (error) {
         console.log(error);
     }

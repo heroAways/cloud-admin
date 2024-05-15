@@ -20,11 +20,5 @@
 </template>
 <script lang='ts' setup>
 import { onActivated, onDeactivated } from 'vue';
-onActivated(() => {
-    console.log('onActivated');
-})
-onDeactivated(() => {
-    console.log('onDeactivated');
-})
 </script>
 <style lang='scss' scoped></style>
