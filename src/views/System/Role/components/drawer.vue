@@ -1,142 +1,145 @@
-<script lang="ts" setup>
-import { ref, nextTick } from "vue";
-
-// 控制抽屉的显示与隐藏
-const visible = ref<boolean>(false);
-
-// 抽屉的标题
-const drawerTitle = ref<string>();
-
-// 关闭抽屉触发的方法
-const handleClose = () => {
-  visible.value = false;
-};
-
-// 打开抽屉的方法
-const openDrawer = (title: string) => {
-  drawerTitle.value = title;
-  visible.value = true;
-};
-
-// 导出给父组件使用
-defineExpose({
-  openDrawer,
-});
-
-const defaultProps = {
-  children: "children",
-  label: "label",
-};
-
-const data = ref([
-  {
-    id: 1,
-    label: "Level one 1",
-    children: [
-      {
-        id: 4,
-        label: "Level two 1-1",
-        children: [
-          {
-            id: 9,
-            label: "Level three 1-1-1",
-          },
-          {
-            id: 10,
-            label: "Level three 1-1-2",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    label: "Level one 2",
-    children: [
-      {
-        id: 5,
-        label: "Level two 2-1",
-      },
-      {
-        id: 6,
-        label: "Level two 2-2",
-      },
-    ],
-  },
-  {
-    id: 3,
-    label: "Level one 3",
-    children: [
-      {
-        id: 7,
-        label: "Level two 3-1",
-      },
-      {
-        id: 8,
-        label: "Level two 3-2",
-      },
-    ],
-  },
-]);
-
-const treeRef = ref();
-
-// tree展开或者收起的状态
-const defaultExpandAll = ref<boolean>(false);
-
-// 展开与收起的方法
-const handleExpand = () => {
-  nextTick(() => {
-    defaultExpandAll.value = !defaultExpandAll.value;
-    changeTreeNodeStatus(treeRef.value.store.root);
-  });
-
-  console.log("defaultExpandAll", defaultExpandAll);
-};
-
-/**
- * 递归所有节点将它的子节点展开
- */
-function changeTreeNodeStatus(node: any) {
-  // console.log('node', node);
-  node.expanded = defaultExpandAll.value;
-  for (let i = 0; i < node.childNodes.length; i++) {
-    // 改变节点的自身expanded状态
-    node.childNodes[i].expanded = defaultExpandAll.value;
-    // 查询当前节点是否还有子节点
-    if (node.childNodes[i].childNodes.length > 0) {
-      // 递归此节点下的N级子节点
-      changeTreeNodeStatus(node.childNodes[i]);
-    }
-  }
-}
-</script>
-
 <template>
-  <el-drawer
-    v-model="visible"
-    title="分配【售前客服】的权限"
-    direction="rtl"
-    :before-close="handleClose"
-    size="400px"
-  >
-    <el-tree
-      ref="treeRef"
-      style="max-width: 600px"
-      :data="data"
-      show-checkbox
-      node-key="id"
-      :default-expand-all="defaultExpandAll"
-      :props="defaultProps"
-    />
-
+  <el-drawer :before-close="handleClose" size="400" style="font-size: 14px;" v-model="visibale" direction="rtl">
+    <template #header>
+      <span>{{ drawerName }}</span>
+    </template>
+    <template #default>
+      <el-tree ref="treeRef" :props="defaultProps" :data="data" show-checkbox node-key="id" :default-expand-all="defaultExpandAll">
+        <template #default="{ node, data }">
+          <svg-icon v-if="data.meta.icon" style="margin-right: 5px;" :icon="filterNode(data.meta.icon)"></svg-icon>
+          <span>{{ data.meta.title }}</span>
+      </template>
+      </el-tree>
+    </template>
     <template #footer>
-      <el-button type="primary">提交</el-button>
-      <el-button>全选/全不选</el-button>
-      <el-button @click="handleExpand">展开/收起</el-button>
+      <el-popconfirm @confirm="handleSubmit" width="157" confirm-button-text="确定" cancel-button-text="取消"
+        title="确定提交权限吗？">
+        <template #reference>
+          <el-button type="primary" @click.stop>提交</el-button>
+        </template>
+      </el-popconfirm>
+      <el-button @click="handleCheckAll">全选/不选</el-button>
+      <el-button @click="handleShowOrHide">展开/收起</el-button>
       <el-button @click="handleClose">取消</el-button>
     </template>
   </el-drawer>
 </template>
+<script lang='ts' setup>
+import { getMenuListApi } from '@/api/Menu/menuApi';
+import { getIdsByGetApi, submitApi } from '@/api/Menu/roleApi';
+import type { ResponseDataType } from '@/api/Types/menuType';
+import { ElNotification, type ElTree } from 'element-plus';
+import { ref, nextTick, onActivated, onMounted } from 'vue';
+// 菜单列表数据
+const data = ref<ResponseDataType[]>([])
+// 获取菜单数据
+const initMenuList = async () => {
+  let res = await getMenuListApi()
+  data.value = res.data
+}
+initMenuList()
+// 过滤器
+const filterNode = (icon: string) => {
+  return icon.replace('ele-','')
+}
+// 角色ID
+const roleId = ref<number | string>()
+// 保存选中的菜单的id
+const menuIds = ref<string[]>([])
+// 标题名称
+const drawerName = ref<string>('')
+// 控制抽屉显示与隐藏
+const visibale = ref<boolean>(false)
+// 封装打开抽屉方法
+const openDrawer = async (roleName: string, id: string | number) => {
+  visibale.value = true
+  roleId.value = id
+  drawerName.value = roleName
+  await initMenuList()
+  await getIdsByGet()
+  await checkMenuNode()
+}
+// 导出方法
+defineExpose({
+  openDrawer
+})
+// 关闭抽屉调用的方法
+const handleClose = () => {
+  visibale.value = false
+}
+/**
+ * @description: 控制展开或隐藏
+ */
+// 控制是否全部展示或隐藏按钮
+const defaultExpandAll = ref<boolean>(false)
+// 定义树形控件标识符
+const treeRef = ref<InstanceType<typeof ElTree>>()
+onMounted(() => {
+  console.log('treeRef', treeRef);
 
-<style scoped lang="scss"></style>
+})
+// 获取选中的id
+const getIdsByGet = async () => {
+  let res = await getIdsByGetApi(roleId.value!)
+  menuIds.value = res.data
+}
+getIdsByGet()
+// 控制展开或隐藏
+const handleShowOrHide = async () => {
+  defaultExpandAll.value = !defaultExpandAll.value
+
+  await ShowOrHideTreeNode(treeRef.value?.root)
+}
+// 封装方法控制树形数据节点的展开属性
+function ShowOrHideTreeNode(node: Node) {
+  for (let i = 0; i < node.childNodes.length; i++) {
+    node.childNodes[i].expanded = defaultExpandAll.value
+    if (node.childNodes[i].childNodes.length > 0) {
+      ShowOrHideTreeNode(node.childNodes[i])
+    }
+  }
+}
+// 全选全不选状态
+const checkAll = ref<boolean>(false)
+// 全选全不选
+const handleCheckAll = () => {
+  checkAll.value = !checkAll.value
+  if (checkAll.value) {
+    treeRef.value?.setCheckedNodes(data.value)
+  } else {
+    treeRef.value?.setCheckedNodes([])
+  }
+}
+const defaultProps = {
+  children: 'children',
+  // label: (data: ResponseDataType, node: Node) => {
+  //   return data.meta.title;
+  // },
+}
+// 根据后台返回的权限数据选中对应的节点
+const checkMenuNode = () => {
+
+  menuIds.value!.forEach((id: string) => {
+    treeRef.value?.setChecked(id, true, false);
+  });
+};
+// 提交
+const handleSubmit = async () => {
+  let ids1 = treeRef.value!.getCheckedKeys()
+  console.log('ids1', ids1);
+  let ids2 = treeRef.value!.getHalfCheckedKeys()
+  console.log('ids2', ids2);
+  let menuAllIds = ids1.concat(ids2)
+  try {
+    await submitApi(roleId.value!, menuAllIds as string[])
+  } catch (err) {
+    console.log(err);
+  }
+  ElNotification({
+    title: '操作成功',
+    type: 'success',
+  })
+  handleClose()
+}
+</script>
+<style lang='scss' scoped></style>

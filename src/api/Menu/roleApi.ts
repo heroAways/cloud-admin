@@ -17,3 +17,13 @@ export const addRoleApi = (paramsRoleAdd:paramsRoleAddType)=> {
 export const editRoleApi = (paramsRoleEdit:ParamsRoleEditType) => {
     return request("/system/role", "PUT", paramsRoleEdit);
 }
+
+// 获取选中数据的id的接口
+export const getIdsByGetApi = (id:number | string) => {
+    return request(`/role/${id}/menu/ids`, "GET");
+}
+
+// 提交接口
+export const submitApi = (id:string | number,submitParams : string[]) => {
+    return request(`/system/role/${id}/menu/ids`,'POST',submitParams)
+}

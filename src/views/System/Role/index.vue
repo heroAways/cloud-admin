@@ -13,7 +13,7 @@
                 </el-form>
             </el-col>
         </el-row>
-            <el-table scrollbar="true" :data="RoleList" stripe style="width: 100%" border highlight-current-row
+            <el-table height="500px" scrollbar="true" :data="RoleList" stripe style="width: 100%" border highlight-current-row
                 align="center">
                 <el-table-column align="center" type="index" label="序号" width="80" />
                 <el-table-column align="center" prop="roleName" label="角色名称" />
@@ -63,7 +63,7 @@ const handleEdit = (row: Record) => {
 const drawerRef = ref<InstanceType<typeof drawerComponent>>()
 // 权限抽屉开启
 const handlePermissition = (row: Record) => {
-    drawerRef.value?.openDrawer(row.roleName)
+    drawerRef.value?.openDrawer(`分配【${row.roleName}】的权限`,row.id)
 }
 // 新增
 const handleAdd = () => {
@@ -101,7 +101,6 @@ const handleDelete = async (id: number) => {
 const initRoleList = async <ResponseRoleListType>() => {
     try {
         let res = await getRoleListApi(findData.value)
-        console.log('res==>', res);
         RoleList.value = res.data.records
         total.value = res.data.total
     } catch (err) {
