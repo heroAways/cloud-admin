@@ -82,10 +82,14 @@
             </el-row>
             <el-row :gutter="18">
                 <el-col :span="15" :lg="15" :md="11" :sm="24" :xs="24">
-                    <el-card shadow="hover" style="height: 380px;">1</el-card>
+                    <el-card shadow="hover" style="height: 380px;">
+                        <div ref="char3Dom" style="width: 702px;height: 340px;"></div>
+                    </el-card>
                 </el-col>
                 <el-col :span="9" :lg="9" :md="11" :sm="24" :xs="24">
-                    <el-card shadow="hover" style="height: 380px;">2</el-card>
+                    <el-card shadow="hover" style="height: 380px;">
+                        <div style="width: 438px;height: 380px;" ref="char4Dom"></div>
+                    </el-card>
                 </el-col>
             </el-row>
         </div>
@@ -94,14 +98,15 @@
 <script lang='ts' setup name="Home">
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts';
-import { option1,option2 } from '@/utils/echart'
+import { option1,option2,option3,option4 } from '@/utils/echart'
 import { getCateDateApi } from '@/api/Home/cateDateApi';
 let charDom = ref()
 let char2Dom = ref()
+let char3Dom = ref()
+let char4Dom = ref()
 onMounted( async () => {
     try {
         let res = await getCateDateApi()
-        console.log('respose==>',res);
         option2.series[0].data = res.data.orderNumList
         option2.series[1].data = res.data.rechargeMoneyList
         option2.series[2].data = res.data.returnMoneyList
@@ -110,6 +115,10 @@ onMounted( async () => {
         myChart.setOption(option1);
         let myChart2 = echarts.init(char2Dom.value)
         myChart2.setOption(option2);
+        let myChart3 = echarts.init(char3Dom.value)
+        myChart3.setOption(option3);
+        let myChart4 = echarts.init(char4Dom.value)
+        myChart4.setOption(option4);
     } catch (error) {
         console.log(error)
     }

@@ -1,7 +1,7 @@
 <template>
     <el-drawer style="font-size: 14px;" size="800px" v-model="visible" direction="rtl" :before-close="handleClose">
         <template #header>
-            <h4>新增商品信息</h4>
+            <h4>{{ drawerTitle }}</h4>
         </template>
         <template #default>
             <el-form label-width="100px" status-icon :model="drawerForm" ref="drawerRef" :rules="drawerFormRules">
@@ -16,8 +16,8 @@
                                 placeholder="请输入(支持条码枪)"></el-input>
                         </el-form-item>
                         <el-form-item label="库存数量：" prop="stockNum">
-                            <el-input-number style="width: 280px;" placeholder="请输入库存数量" v-model="drawerForm.stockNum"
-                                :min="1" :max="10" />
+                            <el-input-number style="width: 280px;" v-model="drawerForm.stockNum"
+                                :min="0" :max="999999" placeholder="请输入库存数量"/>
                         </el-form-item>
                         <el-form-item label="销售价格：" prop="price">
                             <el-input-number style="width: 280px;" placeholder="0.00" v-model="drawerForm.price"
@@ -77,12 +77,20 @@
                                 v-model="drawerForm.remark" placeholder="备注信息最多输入100个字"></el-input>
                         </el-form-item>
                     </el-col>
+                    <el-row>
+                        <el-col :span="24">
+                            <el-form-item label="商品主图："></el-form-item>
+                        </el-col>
+                        <el-col :span="24">
+                            <el-form-item label="商品详情："></el-form-item>
+                        </el-col>
+                    </el-row>
                 </el-row>
             </el-form>
         </template>
         <template #footer>
             <el-row justify="center">
-                <el-button>取消</el-button>
+                <el-button @click="handleClose">取消</el-button>
                 <el-button type="primary">保存</el-button>
             </el-row>
         </template>
@@ -93,20 +101,36 @@
  *  引入
  */
 import type { GoodAddParamsType } from '@/api/Types/GoodType/ListType';
-import { ref } from 'vue'
-
+import type { FormInstance } from 'element-plus';
+import { ref,nextTick } from 'vue'
+import _ from 'lodash'
 /**
  *  数据
  */
+// 表单唯一标识符
+const drawerRef = ref<FormInstance>()
+// drawer表单类型
+const drawerType = ref<string>('add')
+// drawer表单标题
+const drawerTitle = ref<string>('')
 // 父组件的分类数据
 defineProps(['cateData'])
 // 验证表单
 const drawerFormRules = ref({
     name: [
-        { required: true }
+        { required: true,message:'商品名称为必填项！',trigger:'blur' }
     ],
     code:[
-        {required:true}
+        {required:true,message:'商品编码为必填项！',trigger:'blur'}
+    ],
+    categoryId:[
+        {required:true,message:'商品分类为必填项！',trigger:'blur'}
+    ],
+    stockNum:[
+        {required:true,message:'库存数量为必填项！',trigger:'blur'}
+    ],
+    price:[
+        {required:true,message:'销售价格为必填项！',trigger:'blur'}
     ]
 })
 // 控制drawer显示隐藏按钮
@@ -126,7 +150,7 @@ const drawerForm = ref<GoodAddParamsType>({
     quickCode: '',
     remark: '',
     score: '',
-    sort: 0,
+    sort: 1,
     specsName: '',
     status: 0,
     stockNum: 0,
@@ -135,13 +159,24 @@ const drawerForm = ref<GoodAddParamsType>({
 /**
  *  方法
  */
+// 封装打开抽屉方法
+const openDrawer = (type:string,title:string,data={} as any) => {
+    visible.value = true
+    drawerType.value = type
+    drawerTitle.value = title
+    if(type === 'edit'){
+        nextTick(()=>{
+            drawerForm.value = _.cloneDeep(data.row)
+        })
+    }
+}
+
 // 关闭抽屉方法
 const handleClose = () => {
     visible.value = false
-}
-// 封装打开抽屉方法
-const openDrawer = () => {
-    visible.value = true
+    nextTick(()=>{
+        drawerRef.value?.resetFields()
+    })
 }
 // 将方法暴露出去
 defineExpose({

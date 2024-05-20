@@ -97,3 +97,175 @@ export const option2 = {
     }
   ]
 };
+export const option3 = {
+  title: {
+    text: '会员消费Top10'
+  },
+  xAxis: {
+    type: 'category',
+    data: [
+      '于洋',
+      '沈霞',
+      '徐涛',
+      '孙丽',
+      '吕勇',
+      '顾桂英',
+      '曾勇',
+      '万霞',
+      '雷勇',
+      '宋丽'
+    ]
+  },
+  yAxis: {
+    name: '单位：元',
+    type: 'value'
+  },
+  series: [
+    {
+      data: [
+        2000, 12000, 22000, 32000, 42000, 52000, 62000, 72000, 82000, 92000
+      ],
+      type: 'bar',
+      color: {
+        type: 'linear',
+        x: 0,
+        y: 0,
+        x2: 0,
+        y2: 1,
+        colorStops: [
+          {
+            offset: 0,
+            color: '#92c6f6' // 0% 处的颜色
+          },
+          {
+            offset: 0.5,
+            color: '#1c8ff0' // 50% 处的颜色
+          },
+          {
+            offset: 1,
+            color: '#188df0' // 100% 处的颜色
+          }
+        ],
+        global: false // 缺省为 false
+      }
+    }
+  ]
+};
+export const option4 = {
+  title: {
+    text: '气温一盘表°C'
+  },
+  series: [
+    {
+      type: 'gauge',
+      center: ['50%', '60%'],
+      startAngle: 200,
+      endAngle: -20,
+      min: 0,
+      max: 60,
+      splitNumber: 12,
+      itemStyle: {
+        color: '#FFAB91'
+      },
+      progress: {
+        show: true,
+        width: 40 // 橘色宽度
+      },
+
+      pointer: {
+        show: true
+      },
+      axisLine: {
+        lineStyle: {
+          width: 28 // 外部指针与圆盘距离
+        }
+      },
+      axisTick: {
+        distance: -45,
+        splitNumber: 5,
+        lineStyle: {
+          width: 2,
+          color: '#999'
+        }
+      },
+      splitLine: {
+        distance: -55,
+        length: 14,
+        lineStyle: {
+          width: 4,
+          color: '#999'
+        }
+      },
+      axisLabel: {
+        distance: -25,
+        color: '#999',
+        fontSize: 25
+      },
+      anchor: {
+        show: false
+      },
+      title: {
+        show: true
+      },
+      detail: {
+        valueAnimation: true,
+        width: '60%',
+        lineHeight: 40,
+        borderRadius: 8,
+        offsetCenter: [0, '-15%'],
+        fontSize: 50,
+        fontWeight: 'bolder',
+        formatter: '{value} °C',
+        color: 'inherit'
+      },
+      data: [
+        {
+          value: 38
+        }
+      ]
+    },
+
+    {
+      type: 'gauge',
+      center: ['50%', '60%'],
+      startAngle: 200,
+      endAngle: -20,
+      min: 0,
+      max: 60,
+      itemStyle: {
+        color: '#FD7347'
+      },
+      progress: {
+        show: true,
+        width: 15
+      },
+
+      pointer: {
+        show: false
+      },
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: true
+      },
+      splitLine: {
+        show: true
+      },
+      axisLabel: {
+        show: true,
+        distance: 28
+      },
+      detail: {
+        show: true,
+        fontSize: 30
+      },
+      data: [
+        {
+          value: 38
+        }
+      ]
+    }
+  ]
+};
+

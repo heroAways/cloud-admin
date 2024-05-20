@@ -52,7 +52,7 @@
             </el-table-column>
             <el-table-column align="center" label="操作" width="200px">
                 <template #default="{ row }">
-                    <el-button link type="warning" icon="edit">编辑</el-button>
+                    <el-button link type="warning" @click="handleEdit(row)" icon="edit">编辑</el-button>
                     <el-popconfirm @confirm="handleDelete(row)" width="300" confirm-button-text="确定"
                         cancel-button-text="取消" :title="`确定永久删除【${row.name}】吗?`">
                         <template #reference>
@@ -143,9 +143,13 @@ const handleDelete = async (row: ResponseGoodsListTypeRecord) => {
         console.log(err)
     }
 }
+// 编辑
+const handleEdit = (row: ResponseGoodsListTypeRecord) => {
+    drawerRef.value?.openDrawer('edit','修改商品信息',{row})
+}
 // 新增
 const handleAdd = () => {
-    drawerRef.value?.openDrawer()
+    drawerRef.value?.openDrawer('add','新增商品信息')
 }
 // 获取商品列表数据
 const initGoodsList = async () => {

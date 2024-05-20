@@ -32,6 +32,7 @@ import { addCateApi, editCateApi } from '@/api/Good/cateApi';
 import type { paramsAddCateType } from '@/api/Types/GoodType/cateType';
 import { ElNotification, type FormInstance } from 'element-plus';
 import { ref, nextTick } from 'vue'
+import _ from 'lodash'
 /**
  *  数据
  */
@@ -110,7 +111,7 @@ const openDialog = (type: string, title: string, data = {} as any) => {
     })
     if (type === 'edit') {
         nextTick(() => {
-            dialogForm.value = data.row
+            dialogForm.value = _.cloneDeep(data.row)
         })
     }
 }
