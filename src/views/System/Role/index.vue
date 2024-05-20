@@ -4,7 +4,7 @@
             <el-col :span="24">
                 <el-form :inline="true" :model="findData">
                     <el-form-item label="角色名称">
-                        <el-input v-model="findData.name"></el-input>
+                        <el-input placeholder="请输入角色名称" v-model="findData.name"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button icon="search" type="primary" @click="initRoleList">查询</el-button>

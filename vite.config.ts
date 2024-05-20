@@ -17,11 +17,13 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 8889,
-      // open: true,
+      open: true,
       host: 'localhost',
       proxy: {
         [env.VITE_APP_BASE_API]: {
-          target: 'https://mock.apifox.com/m1/4458460-0-default',
+          // my https://mock.apifox.com/m1/4456698-0-default
+          // https://mock.apifox.com/m1/4458460-0-default
+          target: 'https://mock.apifox.com/m1/4456698-0-default',
           changeOrigin: true,
           // rewrite: (path) => path.replace(/`^${env.VITE_APP_BASE_API}`/, '')
           rewrite: (path) => path.replace(new RegExp('^' + `${env.VITE_APP_BASE_API}`),'')

@@ -1,7 +1,7 @@
 export interface ParamsRoleListType {
-    current: number;
-    name: string;
-    size: number;
+    current?: number;
+    name?: string;
+    size?: number;
 }
 export interface ResponseRoleListType {
     records: Record[];

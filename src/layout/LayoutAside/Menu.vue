@@ -1,5 +1,5 @@
 <template>
-    <el-menu active-text-color="#ffd04b" background-color="#fff" class="el-menu-vertical-demo"
+    <el-menu active-text-color="#ffd04b" background-color="var(--lyf-color-white)" class="el-menu-vertical-demo"
         :default-active="$route.path" text-color="#000" router :default-openeds="['/system']"
         :collapse="LayoutConfigStore.isCollapse">
         <el-menu-item index="/home">

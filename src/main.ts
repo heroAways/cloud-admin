@@ -5,6 +5,7 @@ import {setRegisterGlobal} from './global'
 import '@/style/index.scss'
 import pinia from './stores'
 import './permission'
+import 'default-passive-events'
 const app = createApp(App)
 app.use(setRegisterGlobal)
 app.use(pinia)
