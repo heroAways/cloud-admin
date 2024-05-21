@@ -106,7 +106,6 @@ const initGoodsCateDate = async () => {
         })
         initGoodsCate.value = res.data.records
         total.value = res.data.total * 1
-        console.log('res=>', res);
     } catch (err) {
         console.log(err)
     }

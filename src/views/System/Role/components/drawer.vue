@@ -74,10 +74,10 @@ const handleClose = () => {
 const defaultExpandAll = ref<boolean>(false)
 // 定义树形控件标识符
 const treeRef = ref<InstanceType<typeof ElTree>>()
-onMounted(() => {
-  console.log('treeRef', treeRef);
+// onMounted(() => {
+//   console.log('treeRef', treeRef);
 
-})
+// })
 // 获取选中的id
 const getIdsByGet = async () => {
   let res = await getIdsByGetApi(roleId.value!)
@@ -126,9 +126,9 @@ const checkMenuNode = () => {
 // 提交
 const handleSubmit = async () => {
   let ids1 = treeRef.value!.getCheckedKeys()
-  console.log('ids1', ids1);
+  // console.log('ids1', ids1);
   let ids2 = treeRef.value!.getHalfCheckedKeys()
-  console.log('ids2', ids2);
+  // console.log('ids2', ids2);
   let menuAllIds = ids1.concat(ids2)
   try {
     await submitApi(roleId.value!, menuAllIds as string[])

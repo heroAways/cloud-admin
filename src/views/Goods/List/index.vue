@@ -68,7 +68,7 @@
                 :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next"
                 :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
         </el-row>
-        <ListDrawer ref="drawerRef" :cateData="cateData"></ListDrawer>
+        <ListDrawer ref="drawerRef" :cateData="cateData" @refresh="handleRefresh"></ListDrawer>
     </div>
 </template>
 <script lang='ts' setup name="List">
@@ -82,6 +82,10 @@ import { ElNotification, type FormInstance } from 'element-plus';
 /**
  *  数据
  */
+// 更新
+const handleRefresh = () => {
+    initGoodsList()
+}
 // 是否加载
 const isloading = ref<boolean>(false)
 // 数据总数
@@ -159,7 +163,6 @@ const initGoodsList = async () => {
             size: size.value,
             ...queryForm.value
         })
-        console.log('res=>', res);
         initGoods.value = res.data.records
         total.value = res.data.total * 1
         cateData.value = res.data.records.map((item: ResponseGoodsListTypeRecord) => {
@@ -168,7 +171,6 @@ const initGoodsList = async () => {
                 value: item.categoryId
             }
         })
-        console.log('cateData=>', cateData.value);
 
     } catch (err) {
         console.log(err)

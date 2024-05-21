@@ -36,6 +36,10 @@ export interface ResponseGoodsListTypeRecord {
 
 // 商品新增类型
 export interface GoodAddParamsType {
+    updateTime?: string;
+    id?: number; 
+    createTime?: string;
+    categoryName?: string;
     address: string;
     brand: string;
     categoryId: number | string;
@@ -51,7 +55,7 @@ export interface GoodAddParamsType {
     score: number | string;
     sort: number | string;
     specsName: string;
-    status: number | string;
+    status: boolean;
     stockNum: number | string;
     unitName: string;
 }
